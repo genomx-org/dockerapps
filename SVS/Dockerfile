@@ -13,10 +13,10 @@ ENV SVS_VERSION=${SVS_VERSION}
 ENV SVS_INSTALL_FILE=${SVS_INSTALL_FILE}
 
 # Label
-LABEL name="goldenhelix/ubuntu-svs" \
+LABEL name="unam-ume-goldenhelix/ubuntu-svs" \
       version=$SVS_VERSION \
       url="https://github.com/Genomx-org/dockerapps" \
-      vendor="Genomx Project" \
+      vendor="Golden Helix" \
       maintainer="gen@genomx.be" \
       description="Docker image with system dependencies to install Golden Helix SNP & Variation Suite software." \
       license="Artistic-2.0"
@@ -26,7 +26,10 @@ RUN add-pkg xterm
 
 # Add the app
 ADD assets/${SVS_INSTALL_FILE} /opt/
-# Add the startup script
+
+# Install dependencies
 COPY assets/install_dependencies.sh /tmp/install_dependencies.sh
 RUN bash /tmp/install_dependencies.sh
+
+# Copy startup script
 COPY assets/startapp.sh /startapp.sh
