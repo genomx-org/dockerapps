@@ -1,6 +1,6 @@
 # The base OS and SVS's version
-ARG BASE_IMAGE=jlesage/baseimage-gui
-ARG BASE_TAG=ubuntu-20.04
+ARG BASE_IMAGE=dorowu/ubuntu-desktop-lxde-vnc
+ARG BASE_TAG=focal
 FROM ${BASE_IMAGE}:${BASE_TAG} AS base-os
 
 # > after every FROM statements all the ARGs get collected and are no longer available
@@ -21,15 +21,14 @@ LABEL name="unam-ume-goldenhelix/ubuntu-svs" \
       description="Docker image with system dependencies to install Golden Helix SNP & Variation Suite software." \
       license="Artistic-2.0"
 
-# Install xterm
-RUN add-pkg xterm
+## Update apt-get
+#RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4EB27DB2A3B88B8B
+#RUN apt-get update
+#RUN apt-get install -y --no-install-recommends apt-utils
 
 # Add the app
 ADD assets/${SVS_INSTALL_FILE} /opt/
 
 # Install dependencies
-COPY assets/install_dependencies.sh /tmp/install_dependencies.sh
-RUN bash /tmp/install_dependencies.sh
-
-# Copy startup script
-COPY assets/startapp.sh /startapp.sh
+#COPY assets/install_dependencies.sh /tmp/install_dependencies.sh
+#RUN bash /tmp/install_dependencies.sh
