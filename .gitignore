@@ -1,3 +1,5 @@
+.env
+
 # gzs
 *.tar.gz
 
