@@ -12,6 +12,12 @@ LABEL name="unam-ume-r/bioconductor" \
       description="Docker image with system dependencies to install bioconductor." \
       license="Artistic-2.0"
 
-# Install dependencies
-COPY assets/map_existing_users.sh /tmp/map_existing_users.sh
-RUN bash /tmp/map_existing_users.sh
+# Create groups
+ARG genomx=1100
+RUN groupadd -g $genomx genomx
+RUN usermod -a -G genomx rstudio
+
+# Map users
+COPY assets/map_users.sh /tmp/map_users.sh
+COPY assets/users /tmp/users
+RUN bash /tmp/map_users.sh
