@@ -1,14 +1,19 @@
-#!/usr/bin/csh
+#!/bin/bash  
 #Add genomx group
 groupadd -g `getent group genomx | cut -d: -f3` genomx
 
 #Users 
-pwd=$(pwd)
-foreach line (`cat pwd/users`)
-  set split = ($line:as/,/ /)
-  set name = $split[1] 
-  set id = $split[2]
-  set password = $split[3]
+Lines = $(cat $PWD/users)
+for Line in $Lines
+do
+  my_arr=($(echo $Line | tr ";""\n")) 
+
+  ##set split = ($Line:as/,/ /)
+  name = ${my_arr[0]} 
+  id = ${my_arr[1]} 
+  password = ${my_arr[2]} 
 
   useradd $name -u $id -M -N --groups genomx #--comment "Paulina Baca <paulinabacap@gmail.com>"
   echo $name:$password | chpasswd
+done
+  
