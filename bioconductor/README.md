@@ -1,5 +1,16 @@
 # Run bioconductor_docker
 
+Prepare:
+
+    mkdir -p /Tools/R/bioconductor_docker/3.16
+    $BIOR_DEFAULT_PW=strong_password
+
+Build container:
+
+    docker build \
+        --tag unam-uime-bior:bioconductor \
+        --build-arg genomx=`getent group genomx | cut -d: -f3` \
+        ./bioconductor/
 
 Run docker container:
 
@@ -9,6 +20,7 @@ Run docker container:
         --env "PASSWORD=$BIOR_DEFAULT_PW" \
         --env "VIRTUAL_HOST=bio-r.genomx.be" \
         --env "LETSENCRYPT_HOST=bio-r.genomx.be" \
-        --volume /Data/A/dockerapps/bio-r:/Data:ro \
-        --volume /home/:/home/ \
-        bioconductor/bioconductor_docker:RELEASE_3_16
+        --volume "/Tools/R/bioconductor_docker/3.16:/usr/local/lib/R/host-site-library" \
+        --volume "/Data/A/dockerapps/bio-r:/Data:ro" \
+        --volume "/home/:/home/" \
+        unam-uime-bior:bioconductor
