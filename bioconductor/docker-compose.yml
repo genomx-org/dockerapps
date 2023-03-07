@@ -1,0 +1,22 @@
+version: '1.0'
+# únicamente falta especificar el valor de $BIOR_DEFAULT_PW y me parece que toma literal la cadena en la 
+# variable de entorno PASSWORD
+services:
+   bioconductor:
+     image: unam-uime-bior:bioconductor
+     volumes:
+       - /Data/A/dockerapps/bio-r:/Data:ro
+       - /home/:/home/
+       - /Tools/R/bioconductor_docker/3.16:/usr/local/lib/R/host-site-library
+     restart: always
+     ports:
+       - "8787:8787"
+     environment:
+       VIRTUAL_HOST: bio-r.genomx.be
+       LETSENCRYPT_HOST: bio-r.genomx.be
+       PASSWORD: ${BIOR_DEFAULT_PW}
+
+volumes:
+    /home/:
+    /Data/A/dockerapps/bio-r:
+    /Tools/R/bioconductor_docker/3.16:
