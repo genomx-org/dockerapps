@@ -6,18 +6,6 @@ Build container:
         ./jupyter-notebook/
     
 ## Duda con NB USER y todo eso
-Run container:
-    docker run --detach \
-        -p 8888:8888 \
-        --user root \
-        -e NB_USER="my-username" \
-        -e CHOWN_HOME=yes \
-        -w "/home/${NB_USER}" \
-        --name jupy-scipynotebook-6_5_2\
-        --volume "/Data/A/dockerapps/jupy-scn:/Data:ro" \
-        --volume "/home/:/home/" \
-        unam-uime-jupyter:scipy-notebook
-
 Run container ya bien:
     docker run --detach \
         -p 8888:8888 \

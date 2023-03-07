@@ -1,10 +1,10 @@
-# The base OS and SVS's version
+# The base image and software version
 ARG BASE_IMAGE=bioconductor/bioconductor_docker
 ARG BASE_TAG=RELEASE_3_16
 FROM ${BASE_IMAGE}:${BASE_TAG} AS base-os
 
 # Label
-LABEL name="unam-ume-r/bioconductor" \
+LABEL name="unam-ume/bioconductor" \
       version="RELEASE_3_16" \
       url="https://github.com/Genomx-org/dockerapps" \
       vendor="bioconductor" \
