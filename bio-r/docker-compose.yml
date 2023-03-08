@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  bio-r:
+    image: unam-uime_bio-r:3_16
+    container_name: bio-r-3_16
+    hostname: genomx.be
+    volumes:
+      - /Data/A/dockerapps/bio-r:/Data:ro
+      - /home/:/home/
+      - bio-r-3_16:/usr/local/lib/R/host-site-library
+    expose:
+      - "8787"
+    restart: always
+    environment:
+      VIRTUAL_HOST: bio-r.genomx.be
+      LETSENCRYPT_HOST: bio-r.genomx.be
+      PASSWORD: ${BIOR_DEFAULT_PW}
