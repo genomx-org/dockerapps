@@ -1,16 +1,25 @@
-version: '1'
+version: '1.27'
 
 services:
    nginx-proxy:
      image: nginxproxy/nginx-proxy
-     publish: 
-      - "80:80"
-      - "443:443"
+     ports: 
+       - "80:80"
+       - "443:443"
      volumes:
-       - certs:/etc/nginx/certs
-       - vhost:/etc/nginx/vhost.d
-       - html:/usr/share/nginx/html
-       - /var/run/docker.sock:/tmp/docker.sock:ro
+       - type: volume
+         source: certs
+         target: /etc/nginx/certs
+       - type: volume
+         source: vhost
+         target: /etc/nginx/vhost.d
+       - type: volume
+         source: html
+         target: /usr/share/nginx/html
+       - type: volume
+         source: docker-sock
+         target: /tmp/docker.sock
+         read_only: true
      restart: always
 
    acme-companion:
@@ -18,10 +27,15 @@ services:
        - nginx-proxy
      image: nginxproxy/acme-companion
      volumes_from:
-     - nginx-proxy
+       - nginx-proxy
      volumes: 
-     - /var/run/docker.sock:/var/run/docker.sock:ro
-     - acme:/etc/acme.sh
+       - type: volume
+         source: docker-sock
+         target: /var/run/docker.sock
+         read_only: true
+       - type: volume
+         source: acme
+         target: /etc/acme.sh
      restart: always
      environment:
        DEFAULT_EMAIL: gen@genomx.be
@@ -30,5 +44,5 @@ volumes:
     certs:
     vhost:
     html:
-    /var/run/docker.sock:
+    docker-sock:
     acme:
