@@ -3,11 +3,16 @@ services:
   bio-r:
     image: unam-uime_bio-r:3_16
     container_name: bio-r-3_16
-    hostname: genomx.be
+    hostname: genomx
+    ports:
+      - target: 8787
+        published: 8787
+        protocol: tcp
+        mode: host
     volumes:
       - /Data/A/dockerapps/bio-r:/Data:ro
       - /home/:/home/
-      - bio-r-3_16:/usr/local/lib/R/host-site-library
+      - ./bio-r-3_16:/usr/local/lib/R/host-site-library
     expose:
       - "8787"
     restart: always
