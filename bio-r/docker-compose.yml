@@ -13,8 +13,6 @@ services:
       - /Data/A/dockerapps/bio-r:/Data:ro
       - /home/:/home/
       - ./bio-r-3_16:/usr/local/lib/R/host-site-library
-    expose:
-      - "8787"
     restart: always
     environment:
       VIRTUAL_HOST: bio-r.genomx.be
