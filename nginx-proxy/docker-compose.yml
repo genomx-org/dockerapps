@@ -46,6 +46,10 @@ services:
     restart: always
     environment:
       DEFAULT_EMAIL: gen@genomx.be
+networks: 
+  default: 
+    external: 
+      name: ume-pub
 volumes:
   certs:
   vhost:
