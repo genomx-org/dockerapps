@@ -9,12 +9,10 @@ services:
         published: 8787
         protocol: tcp
         mode: host
-    expose:
-      - "8787"
     volumes:
       - /Data/A/dockerapps/bio-r:/Data:ro
       - /home/:/home/
-      - ./bio-r-3_16:/usr/local/lib/R/host-site-library
+      - site-library_3_16:/usr/local/lib/R/host-site-library
     restart: always
     environment:
       VIRTUAL_HOST: bio-r.genomx.be
@@ -24,3 +22,5 @@ networks:
   default: 
     external: 
       name: ume-pub 
+volumes:
+  site-library_3_16:
