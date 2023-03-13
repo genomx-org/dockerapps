@@ -3,7 +3,7 @@
 Prepare:
 
     BIOR_DEFAULT_PW=strong_password
-    docker volume create bio-r-3_16
+    docker volume create bio-r_site-library_3_16
 
 Build container:
 
@@ -21,7 +21,7 @@ Run docker container:
         --env "PASSWORD=$BIOR_DEFAULT_PW" \
         --env "VIRTUAL_HOST=bio-r.genomx.be" \
         --env "LETSENCRYPT_HOST=bio-r.genomx.be" \
-        --volume "bio-r-3_16:/usr/local/lib/R/host-site-library" \
+        --volume "bio-r_site-library_3_16:/usr/local/lib/R/host-site-library" \
         --volume "/Data/A/dockerapps/bio-r:/Data:ro" \
         --volume "/home/:/home/" \
         unam-uime_bio-r:3_16
