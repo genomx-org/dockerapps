@@ -1,24 +1,30 @@
-version: '1.0'
-# Falta especificar algunos parámetros, pero no sé donde van (--user root) ( -w "/home/${NB_USER}")
-# Y asignar directorio local para mapear el opt/conda
+version: '3.3'
 services:
-   jupyter:
-     image: unam-uime-jupyter:jupyter
-     volumes:
-       - /Data/A/dockerapps/jupyter:/Data:ro
-       - /home/:/home/
-       - /ruta_de_conda_dir_de_nuestro_lado/:/opt/conda
-     restart: always
-     ports:
-       - "8888:8888"
-     environment:
-       NB_USER: gen
-       NB_GID: 1101
-       CHOWN_HOME: yes
-       VIRTUAL_HOST: jupyter.genomx.be
-       LETSENCRYPT_HOST: jupyter.genomx.be
+  jupyter:
+    image: unam-uime-jupyter:jupyter
+    container_name: jupyter
+    user: root
+    ports:
+      - target: 8888
+        published: 8888
+        protocol: tcp
+        mode: host
+    volumes:
+      - /Data/A/dockerapps/jupyter:/Data:ro
+      - /home/:/home/
+      - site-library_m3:/opt/conda
+    restart: always
+    environment:
+      NB_USER: gen
+      NB_GID: 1101
+      CHOWN_HOME: 1
+      VIRTUAL_HOST: jupyter.genomx.be
+      LETSENCRYPT_HOST: jupyter.genomx.be
+    working_dir: /home/gen
 
+networks: 
+  default: 
+    external: 
+      name: ume-pub 
 volumes:
-    volume certs:
-    /Data/A/dockerapps/jupyter:
-    /ruta_de_conda_dir_de_nuestro_lado/: 
+  site-library_m3:

@@ -1,8 +1,11 @@
+Prepare:
+    docker volume create jupyter_site-library_m3
+
 Build container:
     docker build \
         --tag unam-uime-jupyter:jupyter \
         --build-arg genomx=`getent group genomx | cut -d: -f3` \
-        ./jupyter/
+        .
     
 Run container ya bien:
     docker run --detach \
@@ -15,7 +18,7 @@ Run container ya bien:
         --name jupyter\
         --env "VIRTUAL_HOST=jupyter.genomx.be" \
         --env "LETSENCRYPT_HOST=jupyter.genomx.be" \
-        --volume "/ruta_de_conda_dir_de_nuestro_lado/:/opt/conda
+        --volume "site-library_m3:/opt/conda
         --volume "/Data/A/dockerapps/jupyter:/Data:ro" \
         --volume "/home/:/home/" \
         unam-uime-jupyter:jupyter 
