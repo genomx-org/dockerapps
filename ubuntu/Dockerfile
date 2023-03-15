@@ -16,17 +16,10 @@ RUN groupadd -g $genomx genomx
 # Install dependencies
 RUN DEBIAN_FRONTEND=noninteractive \
   apt-get update \
-  && apt install -y python3 python3-dev git curl \
+  && apt install -y wget python3 python3-dev git curl \
   && rm -rf /var/lib/apt/lists/*
 
 # Map users
-COPY assets/map_users.sh /tmp/map_users.sh
+COPY assets/custom_init.sh /tmp/custom_init.sh
 COPY assets/users /tmp/users
-RUN bash /tmp/map_users.sh
-
-# Installing The Littlest JupyterHub
-RUN curl -L https://tljh.jupyter.org/bootstrap.py | sudo python3 -  --admin gen --show-progress-page
-
-
-
-
+RUN bash /tmp/custom_init.sh

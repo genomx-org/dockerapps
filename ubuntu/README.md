@@ -9,7 +9,6 @@ Run container:
      docker run --detach \
         --name ubuntu_22.04 \
         --volume "/home/:/home/" \
-        -w "/home/gen" \
         unam-uime_ubuntu:22.04
 
 
