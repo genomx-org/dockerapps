@@ -19,7 +19,7 @@ To run:
         --volume /Data/A/dockerapps/SVS:/Data:ro \
         --volume /Pools/dockerapps/SVS/home/:/home/svs \
         --volume /dev/shm:/dev/shm \
-        --volume ssl:/etc/nginx/ssl \
+        --volume $PWD/ssl:/etc/nginx/ssl \
         unam-uime-svs:ubuntu-vnc
 
 ## TO-DO
@@ -34,5 +34,16 @@ Run:
     sudo apt-get install htop
 
 edit nginx config file at `/etc/nginx/sites-enabled/default` and restart:
+
+    server {
+        listen 443 ssl;
+        server_name svs.genomx.be;
+        ssl_certificate ssl/nginx.crt;
+        ssl_certificate_key ssl/nginx.key;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+        ssl_prefer_server_ciphers on;
+    }
+
+restart
 
     /etc/init.d/nginx restart
