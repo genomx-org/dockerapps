@@ -15,10 +15,11 @@ To run:
         --env "USER=gen" \
         --env "PASSWORD=$SVS_PASSWORD" \
         --env "VNC_PASSWORD=$SVS_PASSWORD" \
+        --env  RESOLUTION=1920x1080 \
         --volume /Data/A/dockerapps/SVS:/Data:ro \
         --volume /Pools/dockerapps/SVS/home/:/home/svs \
         --volume /dev/shm:/dev/shm \
-        --volume ${PWD}/SVS/ssl:/etc/nginx/ssl \
+        --volume ssl:/etc/nginx/ssl \
         unam-uime-svs:ubuntu-vnc
 
 ## TO-DO

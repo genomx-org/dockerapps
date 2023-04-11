@@ -29,6 +29,5 @@ LABEL name="unam-ume-goldenhelix/ubuntu-svs" \
 # Add the app
 ADD assets/${SVS_INSTALL_FILE} /opt/
 
-# Install dependencies
-#COPY assets/install_dependencies.sh /tmp/install_dependencies.sh
-#RUN bash /tmp/install_dependencies.sh
+
+   
