@@ -32,7 +32,7 @@ To run with nginx-acme:
         --env "VIRTUAL_HOST=svs.genomx.be" \
         --env "LETSENCRYPT_HOST=svs.genomx.be" \
         --volume /Data/A/dockerapps/SVS:/Data:ro \
-        --volume /Pools/dockerapps/SVS/home/:/home/svs \
+        --volume /shared/:/shared \
         --volume /dev/shm:/dev/shm \
         --network ume-pub \
         unam-uime-svs:ubuntu-vnc

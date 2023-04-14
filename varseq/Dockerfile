@@ -5,16 +5,16 @@ FROM ${BASE_IMAGE}:${BASE_TAG} AS base-os
 
 # > after every FROM statements all the ARGs get collected and are no longer available
 ARG BASE_OS_DISTRO=Lin64
-ARG SVS_VERSION=8.9.1
-ARG SVS_INSTALL_FILE=SVS-${BASE_OS_DISTRO}-${SVS_VERSION}.tar.gz
+ARG VARSEQ_VERSION=8.9.1
+ARG VARSEQ_INSTALL_FILE=VarSeq-${BASE_OS_DISTRO}-${VARSEQ_VERSION}.tar.gz
 
 # Environmental variables
-ENV SVS_VERSION=${SVS_VERSION}
-ENV SVS_INSTALL_FILE=${SVS_INSTALL_FILE}
+ENV VARSEQ_VERSION=${VARSEQ_VERSION}
+ENV VARSEQ_INSTALL_FILE=${VARSEQ_INSTALL_FILE}
 
 # Label
-LABEL name="unam-ume-goldenhelix/ubuntu-svs" \
-      version=$SVS_VERSION \
+LABEL name="unam-ume-goldenhelix/ubuntu-varseq" \
+      version=$VARSEQ_VERSION \
       url="https://github.com/Genomx-org/dockerapps" \
       vendor="Golden Helix" \
       maintainer="gen@genomx.be" \
@@ -27,7 +27,7 @@ LABEL name="unam-ume-goldenhelix/ubuntu-svs" \
 #RUN apt-get install -y --no-install-recommends apt-utils
 
 # Add the app
-ADD assets/${SVS_INSTALL_FILE} /opt/
+ADD assets/${VARSEQ_INSTALL_FILE} /opt/
 
 # Create group
 USER root
