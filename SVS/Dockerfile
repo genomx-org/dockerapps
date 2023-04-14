@@ -29,17 +29,9 @@ LABEL name="unam-ume-goldenhelix/ubuntu-svs" \
 # Add the app
 ADD assets/${SVS_INSTALL_FILE} /opt/
 
-# Create group
-USER root
-RUN groupadd -g 1100 genomx
-RUN usermod -a -G genomx gen
-RUN chgrp genomx /home/gen
-RUN chmod 2777 -R /home/gen
-
-# Install dependencies
-RUN DEBIAN_FRONTEND=noninteractive \
-  apt-get update \
-  && apt install -y htop \
-  && rm -rf /var/lib/apt/lists/*
+  # Map users
+COPY assets/map_users.sh /tmp/map_users.sh
+COPY assets/users /tmp/users
+RUN bash /tmp/map_users.sh
 
    
