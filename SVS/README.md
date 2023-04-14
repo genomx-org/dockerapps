@@ -15,13 +15,27 @@ To run:
         --env "USER=gen" \
         --env "PASSWORD=$SVS_PASSWORD" \
         --env "VNC_PASSWORD=$SVS_PASSWORD" \
-        --env  RESOLUTION=1920x1080 \
         --volume /Data/A/dockerapps/SVS:/Data:ro \
         --volume /Pools/dockerapps/SVS/home/:/home/svs \
         --volume /dev/shm:/dev/shm \
         --volume $PWD/ssl:/etc/nginx/ssl \
         unam-uime-svs:ubuntu-vnc
 
+To run with nginx-acme:
+
+    docker run --detach \
+        -p 6081:443 \
+        --name svs-on-vnc \
+        --env "USER=gen" \
+        --env "PASSWORD=$SVS_PASSWORD" \
+        --env "VNC_PASSWORD=$SVS_PASSWORD" \
+        --env "VIRTUAL_HOST=svs.genomx.be" \
+        --env "LETSENCRYPT_HOST=svs.genomx.be" \
+        --volume /Data/A/dockerapps/SVS:/Data:ro \
+        --volume /Pools/dockerapps/SVS/home/:/home/svs \
+        --volume /dev/shm:/dev/shm \
+        --network ume-pub \
+        unam-uime-svs:ubuntu-vnc
 ## TO-DO
 
 Run:
