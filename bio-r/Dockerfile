@@ -12,10 +12,6 @@ LABEL name="unam-uime_bio-r" \
       description="Docker image with system dependencies to install bioconductor." \
       license="Artistic-2.0"
 
-# Create groups
-ARG genomx=1100
-RUN groupadd -g $genomx genomx
-RUN usermod -a -G genomx rstudio
 
 # Map users
 COPY assets/map_users.sh /tmp/map_users.sh

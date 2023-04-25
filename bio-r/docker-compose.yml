@@ -12,12 +12,10 @@ services:
     volumes:
       - /Data/A/dockerapps/bio-r:/Data:ro
       - /home/:/home/
+      - /public/:/public/
+      - /apps/:/apps/
       - site-library_3_16:/usr/local/lib/R/host-site-library
     restart: always
-    environment:
-      VIRTUAL_HOST: bio-r.genomx.be
-      LETSENCRYPT_HOST: bio-r.genomx.be
-      PASSWORD: ${BIOR_DEFAULT_PW}
 networks: 
   default: 
     external: 
