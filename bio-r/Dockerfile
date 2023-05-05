@@ -17,3 +17,19 @@ LABEL name="unam-uime_bio-r" \
 COPY assets/map_users.sh /tmp/map_users.sh
 COPY assets/users /tmp/users
 RUN bash /tmp/map_users.sh
+
+# Install python and other dependencies
+#RUN DEBIAN_FRONTEND=noninteractive \
+ # apt-get update \
+ # && apt install -y python3.11 python3-pip curl \
+ # && rm -rf /var/lib/apt/lists/*
+
+# Install poetry
+#RUN curl -sSL https://install.python-poetry.org | python3 -
+
+#Install R 4.0.5 
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt-get update \
+    && apt install -y r-base=4.0.5 r-base-core=4.0.5 r-base-dev=4.0.5\
+    && rm -rf /var/lib/apt/lists/*
+
