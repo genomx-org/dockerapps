@@ -12,20 +12,27 @@ LABEL name="unam-uime_bio-r" \
       description="Docker image with system dependencies to install bioconductor." \
       license="Artistic-2.0"
 
+# Install fish
+RUN apt-get update && apt-get install -y fish
+
+#Groups
+USER root
+RUN groupadd --key GID_MIN=1000 --key GID_MAX=1999 public
+RUN groupadd --key GID_MIN=1000 --key GID_MAX=1999 genomx-org
+RUN groupadd --key GID_MIN=1000 --key GID_MAX=1999 unam-org
+RUN groupadd --key GID_MIN=1000 --key GID_MAX=1999 mcps-org
 
 # Map users
-COPY assets/map_users.sh /tmp/map_users.sh
+COPY assets/create_users.sh /tmp/create_users.sh
+COPY assets/create_user.sh /tmp/create_user.sh
 COPY assets/users /tmp/users
-RUN bash /tmp/map_users.sh
+RUN bash /tmp/create_users.sh
 
 # Install poetry
 USER root
 RUN curl -sSL https://install.python-poetry.org | python3 - \
      && /root/.local/bin/poetry --version 
 ENV PATH="/root/.local/bin:${PATH}"
-
-# Install fish
-RUN apt-get update && apt-get install -y fish
 
 #Install R 4.0.5 
 #RUN DEBIAN_FRONTEND=noninteractive \
