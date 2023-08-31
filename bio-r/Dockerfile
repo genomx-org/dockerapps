@@ -17,10 +17,11 @@ RUN apt-get update && apt-get install -y fish
 
 #Groups
 USER root
-RUN groupadd --key GID_MIN=1000 --key GID_MAX=1999 public
-RUN groupadd --key GID_MIN=1000 --key GID_MAX=1999 genomx-org
-RUN groupadd --key GID_MIN=1000 --key GID_MAX=1999 unam-org
-RUN groupadd --key GID_MIN=1000 --key GID_MAX=1999 mcps-org
+RUN groupadd -g 1101 public
+RUN groupadd -g 1102 genomx-org
+RUN groupadd -g 1103 unam-org
+RUN groupadd -g 1104 mcps-org
+RUN groupadd -g 1105 uime-org
 
 # Map users
 COPY assets/create_users.sh /tmp/create_users.sh

@@ -17,6 +17,7 @@ services:
       - /apps/:/apps/
       - site-library_3_16:/usr/local/lib/R/host-site-library
       - /opt/R/:/opt/R
+      - /orgs/:orgs/
     restart: always
     environment:
       VIRTUAL_HOST: bio-r.genomx.be
