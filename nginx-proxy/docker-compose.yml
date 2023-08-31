@@ -2,17 +2,11 @@ version: '3.3'
 
 services:
   nginx-proxy:
-    image: nginxproxy/nginx-proxy
-    container_name: nginx-proxy-m3
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: nginx-proxy
     ports:
-      - target: 80
-        published: 80
-        protocol: tcp
-        mode: host
-      - target: 443
-        published: 443
-        protocol: tcp
-        mode: host
+      - 0.0.0.0:80:80
+      - 0.0.0.0:443:443
     volumes:
       - type: volume
         source: certs
@@ -32,7 +26,7 @@ services:
     depends_on:
       - nginx-proxy
     image: nginxproxy/acme-companion
-    container_name: acme-companion-m3
+    container_name: acme-companion
     volumes_from:
       - nginx-proxy
     volumes: 

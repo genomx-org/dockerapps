@@ -9,7 +9,6 @@ Build container:
 
     docker build \
         --tag unam-uime_bio-r:3_16 \
-        --build-arg genomx=`getent group genomx | cut -d: -f3` \
         .
 
 Run docker container:
@@ -25,3 +24,16 @@ Run docker container:
         --volume "/Data/A/dockerapps/bio-r:/Data:ro" \
         --volume "/home/:/home/" \
         unam-uime_bio-r:3_16
+
+
+
+Shared libraries (actualmente ya está montando el directorio que servirá para instalar librerías, solo es necesario asignar permisos)
+
+Para cambiar el grupo de host-site-library
+    sudo chgrp genomx-org /usr/local/lib/R/host-site-library
+
+Cambiar permisos 
+    sudo chmod 771 /usr/local/lib/R/host-site-library
+
+Instalar librerías
+    install.packages('librería', lib = "/usr/local/lib/R/host-site-library")

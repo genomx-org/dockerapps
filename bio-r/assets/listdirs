@@ -1,0 +1,6 @@
+public,/public,rwX,---
+genomx-org,/orgs/genomx,rwX,---
+unam-org,/orgs/unam,rwX,---
+mcps-org,/orgs/mcps,rwX,---
+huella-genica-org,/orgs/huella-genica,rwX,---
+bit-a-bit-org,/orgs/bit-a-bit,rwX,---
